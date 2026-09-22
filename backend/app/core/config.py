@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     upload_dir:str='./uploads'
     model_path:str='./weights/disease_model.pt'
     classes_path:str='./weights/classes.json'
-    cors_origins:str='http://localhost:5173,http://localhost:3000'
+    cors_origins:str='http://localhost:5173,http://localhost:3000,https://smart-ai-farming-frontend.onrender.com'
     max_upload_mb:int=8
     model_config=SettingsConfigDict(env_file='.env',extra='ignore')
     @property
