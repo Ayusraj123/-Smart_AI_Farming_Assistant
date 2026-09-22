@@ -8,7 +8,7 @@ from sqlalchemy import select, func
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
-from app.db import get_db
+from app.db import get_db, Base, engine
 from app.models import (
     User,
     FarmerProfile,
@@ -29,6 +29,8 @@ from app.ai.disease import predict
 
 
 s = settings()
+
+Base.metadata.create_all(bind=engine)
 
 Path(s.upload_dir).mkdir(
     parents=True,
