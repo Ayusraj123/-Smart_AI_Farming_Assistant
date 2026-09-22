@@ -1,0 +1,122 @@
+import json
+import random
+from pathlib import Path
+
+import cv2
+import numpy as np
+import torch
+from PIL import Image
+
+from app.ai.disease import CNN
+
+
+ROOT = Path("backend/data/plantvillage")
+WEIGHTS = Path("backend/weights/disease_model.pt")
+CLASSES = Path("backend/weights/classes.json")
+
+# Load classes
+classes = json.loads(CLASSES.read_text())
+
+# Load model
+checkpoint = torch.load(
+    WEIGHTS,
+    map_location="cpu",
+    weights_only=True,
+)
+
+model = CNN(len(classes))
+
+if "model_state" in checkpoint:
+    model.load_state_dict(checkpoint["model_state"])
+else:
+    model.load_state_dict(checkpoint)
+
+model.eval()
+
+
+def predict(image_path):
+    image = np.array(
+        Image.open(image_path).convert("RGB")
+    )
+
+    image = cv2.resize(image, (128, 128))
+
+    image = image.astype("float32") / 255.0
+    image = (image - 0.5) / 0.5
+
+    tensor = (
+        torch.from_numpy(image)
+        .permute(2, 0, 1)
+        .unsqueeze(0)
+    )
+
+    with torch.inference_mode():
+        probabilities = torch.softmax(
+            model(tensor), dim=1
+        )[0]
+
+        confidence, index = probabilities.max(0)
+
+    return (
+        classes[int(index)],
+        float(confidence) * 100
+    )
+
+
+random.seed(42)
+
+total = 0
+correct = 0
+
+print("\nMODEL TEST")
+print("=" * 70)
+
+for class_dir in sorted(ROOT.iterdir()):
+
+    if not class_dir.is_dir():
+        continue
+
+    files = [
+        f for f in class_dir.iterdir()
+        if f.suffix.lower() in {
+            ".jpg", ".jpeg", ".png"
+        }
+    ]
+
+    if not files:
+        continue
+
+    files = random.sample(
+        files,
+        min(10, len(files))
+    )
+
+    class_correct = 0
+
+    for image_path in files:
+
+        predicted, confidence = predict(
+            image_path
+        )
+
+        if predicted == class_dir.name:
+            class_correct += 1
+            correct += 1
+
+        total += 1
+
+    accuracy = (
+        class_correct / len(files) * 100
+    )
+
+    print(
+        f"{class_dir.name:<55} "
+        f"{class_correct}/{len(files)} "
+        f"({accuracy:.0f}%)"
+    )
+
+
+print("=" * 70)
+print(
+    f"OVERALL: {correct}/{total} "
+    f"({correct / total * 100:.2f}
