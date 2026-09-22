@@ -27,3 +27,8 @@ Without trained weights the API deliberately reports `model_unavailable` instead
 ## API
 
 `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, `GET/PUT /api/profile`, crop CRUD under `/api/crops`, `POST/GET /api/diagnosis`, fertilizer and irrigation under `/api/recommendations`, `GET /api/weather`, and `POST/GET /api/chat`.
+
+## 🚀 Live Project
+
+🌐 **Published Website:**  
+https://smart-ai-farming-frontend.onrender.com
