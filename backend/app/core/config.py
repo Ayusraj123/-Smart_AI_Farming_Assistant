@@ -13,6 +13,11 @@ class Settings(BaseSettings):
     max_upload_mb:int=8
     model_config=SettingsConfigDict(env_file='.env',extra='ignore')
     @property
-    def origins(self): return [x.strip() for x in self.cors_origins.split(',') if x.strip()]
+    def origins(self):
+        origins = [x.strip() for x in self.cors_origins.split(",") if x.strip()]
+        frontend = "https://smart-ai-farming-frontend.onrender.com"
+        if frontend not in origins:
+            origins.append(frontend)
+        return origins
 @lru_cache
 def settings(): return Settings()

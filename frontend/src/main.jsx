@@ -5,7 +5,7 @@ import farmBg from "./farm-bg copy.jpg";
 
 const API =
   import.meta.env.VITE_API_URL ||
-  "http://localhost:8000/api";
+  "https://smart-ai-farming-backend.onrender.com/api";
 
 async function api(path, options = {}) {
   const headers = { ...(options.headers || {}) };
