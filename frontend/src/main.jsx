@@ -3,9 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./style.css";
 import farmBg from "./farm-bg copy.jpg";
 
-const API =
-  import.meta.env.VITE_API_URL ||
-  "https://smart-ai-farming-backend.onrender.com/api";
+const API = "https://smart-ai-farming-backend.onrender.com/api";
 
 async function api(path, options = {}) {
   const headers = { ...(options.headers || {}) };
