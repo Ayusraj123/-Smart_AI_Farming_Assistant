@@ -1,3 +1,7 @@
+## 🌐 Live Demo
+
+[![Live Demo](https://img.shields.io/badge/🚀%20LIVE%20DEMO-Smart%20AI%20Farming%20Assistant-success?style=for-the-badge)](https://smart-ai-farming-frontend.onrender.com)
+
 # Smart AI Farming Assistant
 
 Full-stack implementation based on the uploaded synopsis. It includes farmer registration/login/profile, dashboard, crop management/history, leaf-image upload, OpenCV preprocessing, PyTorch disease inference/training pipeline, fertilizer and irrigation recommendations, OpenWeatherMap forecasting, AI farming assistant, REST APIs, PostgreSQL, Alembic migrations, validation and responsive React UI.
