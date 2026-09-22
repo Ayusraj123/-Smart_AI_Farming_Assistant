@@ -36,3 +36,39 @@ Without trained weights the API deliberately reports `model_unavailable` instead
 
 🌐 **Published Website:**  
 https://smart-ai-farming-frontend.onrender.com
+
+
+## 📌 Features
+- 🔐 Farmer registration and login
+- 🌱 Crop management and history
+- 🩺 AI plant disease diagnosis
+- 🤖 PyTorch CNN with 38 PlantVillage classes
+- 💡 Fertilizer and irrigation recommendations
+- 🌦️ Weather module
+- 💬 AI Farming Assistant
+- 🗃️ PostgreSQL database
+- 🐳 Docker deployment
+
+## 🛠️ Technology Stack
+- React + Vite
+- FastAPI
+- PyTorch
+- PostgreSQL
+- SQLAlchemy
+- JWT Authentication
+- Docker / Docker Compose
+
+## 🤖 AI Model
+- PlantVillage dataset
+- 38 classes
+- 23,774 images in final training run
+- 128×128 input
+- Best validation accuracy: 96.64%
+
+## 🚀 Deployment
+**Live Website:** https://smart-ai-farming-frontend.onrender.com
+
+**Backend:** https://smart-ai-farming-backend.onrender.com
+
+## 📸 Screenshots
+Screenshots and project demonstration are included in the project presentation.
